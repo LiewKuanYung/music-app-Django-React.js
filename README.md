@@ -26,7 +26,7 @@ powershell\music_app\frontend> npm run dev
 - [Serializers](https://www.django-rest-framework.org/api-guide/serializers/) 
 - View, using [generic views](https://www.django-rest-framework.org/api-guide/generic-views/#generic-views)
 
-![demo-image-06](./demo-images/06-api-room.png)
+![demo-image-06](./demo-images/06-api.room.png)
 
 ### Tutorial 3 - React Integration Using Webpack & Babel
 - Set up: `django-admin startapp frontend`
