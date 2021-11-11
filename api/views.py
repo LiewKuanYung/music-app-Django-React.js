@@ -11,6 +11,29 @@ class RoomView(generics.ListCreateAPIView): # checkout concrete view classes
     # serializer = how to return
     serializer_class = RoomSerializer
 
+class GetRoom(APIView):
+    # define serializer just like CreateRoomView
+    serializer_class = RoomSerializer
+    # keyword argument, will be used to indicate code need to be an keyword arugment.
+    lookup_url_kwarg = 'code'
+
+    def get(self, request, format=None):
+        # request.GET gives you the information from url
+        # request.GET.get() is looking for parameters inside this get
+        code = request.GET.get(self.lookup_url_kwarg) # looking for this lookup_url_kwarg, which is 'code'
+        if code != None:
+            # find which room has this code
+            room = Room.objects.filter(code=code)
+            # if there's this room
+            if len(room) > 0:
+                data = RoomSerializer(room[0]).data
+                # check if user is the host
+                data['is_host'] = (self.request.session.session_key == room[0].host)
+                return Response(data, status=status.HTTP_200_OK)
+            return Response({'Room Not Found': 'Invalid Room Code'}, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({'Bad Request': 'Code parameter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+
 class CreateRoomView(APIView):
     serializer_class = CreateRoomSerializer
     # Take note that this CreateRoomSerializer doesn't have the 'host' field
