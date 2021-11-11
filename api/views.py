@@ -23,7 +23,7 @@ class CreateRoomView(APIView):
         # get access to the session id
 
         # check if current request has an active access with browser
-        if not self.request.session.exists(self.request.session.sessian_key):
+        if not self.request.session.exists(self.request.session.session_key):
             # if no, create a session
             self.request.session.create()
 
