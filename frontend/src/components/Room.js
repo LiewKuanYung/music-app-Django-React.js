@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { TextField, Button, Grid, Typography } from "@material-ui/core";
 
 export default class Room extends Component {
     constructor(props) {
@@ -28,12 +29,27 @@ export default class Room extends Component {
 
     render() {
         return (
-            <div>
-                <h3>{this.roomCode}</h3>
-                <p>Votes: {this.state.votesToSkip}</p>
-                <p>Guest Can Pause: {this.state.guestCanPause.toString()}</p>
-                <p>Host: {this.state.isHost.toString()}</p>
-            </div>
+            <Grid container spacing={1}>
+                <Grid item xs={12} align="center">
+                    <div>
+                        <Typography variant="h4" component="h4">
+                            Room Code: {this.roomCode}
+                        </Typography>
+                        <p>Votes: {this.state.votesToSkip}</p>
+                        <p>Guest Can Pause: {this.state.guestCanPause.toString()}</p>
+                        <p>Host: {this.state.isHost.toString()}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                <Button 
+                    variant="contained"
+                    color="primary"
+                    href="/"
+                >
+                    Back Home
+                </Button>
+                </Grid>
+            </Grid>
         );
     }
 }
